@@ -1,0 +1,27 @@
+## a,b based on the month of March
+
+Tm=weather_march['avg_temperature']
+Pm=weather_march['precipitation']
+delta_T = Tm - Tm.mean()
+delta_P = Pm - Pm.mean()
+a_values = np.linspace(-200, 200, 100)  
+b_values = np.linspace(-100, 100, 100)  
+best_a = None
+best_b = None
+min_error = float('inf')
+
+for a in a_values:
+    for b in b_values:
+        
+        predicted_C = C0 + a * delta_T - b * delta_P
+        error = np.sum((5742 - predicted_C) ** 2)
+    
+        if error < min_error:
+            min_error = error
+            best_a = a
+            best_b = b
+
+print("Best a:", best_a)
+print("Best b:", best_b)
+print("Minimum error:", min_error)
+ 
